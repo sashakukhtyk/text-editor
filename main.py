@@ -1,3 +1,5 @@
+from fileinput import filename
+
 from PyQt5.QtWidgets import *
 from PyQt5.QtGui import QFont
 from PyQt5 import uic
@@ -21,6 +23,7 @@ class MainWindow(QMainWindow):
 
         # Connect the "Open" action to the method that opens files
         self.actionOpen.triggered.connect(self.open_file)
+        self.actionSave.triggered.connect(self.save_file)
 
     # Method to change the font size of the text editor
     def change_size(self, size):
@@ -35,6 +38,13 @@ class MainWindow(QMainWindow):
             with open(filename, 'r') as f:
                 # Set the content of the file in the text editor
                 self.plainTextEdit.setPlainText(f.read())
+
+    def save_file(self):
+        options = QFileDialog.Options()
+        filename, _ = QFileDialog.getSaveFileName(self, "", "Text Files (*.txt);;All Files (*)", "", options=options)
+        if filename != "":
+            with open(filename, 'w') as f:
+                f.write(self.plainTextEdit.toPlainText())
 
 # Main function to run the application
 def main():
