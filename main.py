@@ -42,7 +42,7 @@ class MainWindow(QMainWindow):
 
     def save_file(self):
         options = QFileDialog.Options()
-        filename, _ = QFileDialog.getSaveFileName(self, "", "Text Files (*.txt);;All Files (*)", "", options=options)
+        filename, _ = QFileDialog.getSaveFileName(self, "Save File", "Text Files (*.txt);;All Files (*)", "", options=options)
         if filename != "":
             with open(filename, 'w') as f:
                 f.write(self.plainTextEdit.toPlainText())
