@@ -24,6 +24,7 @@ class MainWindow(QMainWindow):
         # Connect the "Open" action to the method that opens files
         self.actionOpen.triggered.connect(self.open_file)
         self.actionSave.triggered.connect(self.save_file)
+        self.actionClose.triggered.connect(exit)
 
     # Method to change the font size of the text editor
     def change_size(self, size):
@@ -45,6 +46,21 @@ class MainWindow(QMainWindow):
         if filename != "":
             with open(filename, 'w') as f:
                 f.write(self.plainTextEdit.toPlainText())
+
+    def closeEvent(self, event):
+        dialog = QMessageBox(self)
+        dialog.setText("Do you want to save the file?")
+        dialog.addButton(QPushButton("Yes"), QMessageBox.YesRole) #0
+        dialog.addButton(QPushButton("No"), QMessageBox.NoRole) #1
+        dialog.addButton(QPushButton("Cancel"), QMessageBox.RejectRole) #2
+
+        answer = dialog.exec_()
+
+        if answer == 0:
+            self.save_file()
+            event.accept()
+        elif answer == 2:
+            event.ignore()
 
 # Main function to run the application
 def main():
