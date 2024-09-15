@@ -1,4 +1,5 @@
 from PyQt5.QtWidgets import *
+from PyQt5.QtGui import QFont
 from PyQt5 import uic
 
 
@@ -10,6 +11,13 @@ class MainWindow(QMainWindow):
         self.show()
 
         self.setWindowTitle('Notepad')
+        self.action12_pt.triggered.connect(lambda: self.change_size(12))
+        self.action18_pt.triggered.connect(lambda: self.change_size(18))
+        self.action24_pt.triggered.connect(lambda: self.change_size(24))
+
+    def change_size(self, size):
+        self.plainTextEdit.setFont(QFont('Arial', size))
+
 
 
 def main():
