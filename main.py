@@ -9,6 +9,8 @@ class MainWindow(QMainWindow):
         uic.loadUi('editor.ui', self)
         self.show()
 
+        self.setWindowTitle('Notepad')
+
 
 def main():
     app = QApplication([])
